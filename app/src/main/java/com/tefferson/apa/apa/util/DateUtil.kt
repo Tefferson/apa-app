@@ -16,6 +16,8 @@ object DateUtil {
             return "${diff / (60 * 1000)}m"
         } else if (diff < 24 * 3600 * 1000) {
             return "${diff / (3600 * 1000)}h"
+        } else if (diff < 7 * 24 * 3600 * 1000) {
+            return "${diff / (24 * 3600 * 1000)}d"
         } else {
             return date.toString()
         }

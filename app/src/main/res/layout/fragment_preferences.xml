@@ -16,6 +16,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:listitem="@layout/item_preferences_toggle"></ListView>
+
+        <Button
+            android:id="@+id/bt_sign_out"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Sair"/>
+
     </LinearLayout>
 
 </FrameLayout>

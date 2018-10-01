@@ -1,13 +1,15 @@
 package com.tefferson.apa.apa.activity
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.view.ViewPager
+import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import com.android.volley.Response
 import com.tefferson.apa.apa.R
 import com.tefferson.apa.apa.adapter.MainPagerAdapter
 import com.tefferson.apa.apa.enumeration.MainPager
+import com.tefferson.apa.apa.service.DeviceService
 import com.tefferson.apa.apa.util.BottomNavigationUtil
 
 class MainActivity : AppCompatActivity(),
@@ -17,6 +19,7 @@ class MainActivity : AppCompatActivity(),
     private val vpMain by lazy { findViewById<ViewPager>(R.id.vp_main) }
     private val bottomNavigation by lazy { findViewById<BottomNavigationView>(R.id.bottom_navigation) }
     private val adapter by lazy { MainPagerAdapter(this, vpMain, this) }
+    private val deviceService by lazy { DeviceService(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -30,6 +33,8 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        deviceService.sendToken(Response.Listener { }, Response.ErrorListener { })
+
         initElements()
     }
 
@@ -37,7 +42,7 @@ class MainActivity : AppCompatActivity(),
     override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
     override fun onPageSelected(position: Int) {
         val itemId = MainPager.values()[position].itemId
-        if( bottomNavigation.selectedItemId != itemId) {
+        if (bottomNavigation.selectedItemId != itemId) {
             bottomNavigation.selectedItemId = itemId
         }
     }
